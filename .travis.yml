@@ -1,22 +1,17 @@
 language: python
-
 sudo: false
-
 python:
-  - '3.5'
-  - '2.7.12'
-  - '2.6'
-  - '3.3'
-  - '3.4'
-
+- '3.5'
+- 2.7.12
+- '2.6'
+- '3.3'
+- '3.4'
 install:
 - pip install -r requirements.txt
 - pip install -r requirements-dev.txt
-
+before_script:
+- bash test_mypy.sh
+before_install:
+- openssl aes-256-cbc -K $MY_KEY -iv $MY_IV -in root_key.enc -out root_key -d
 script:
-- python ./setup.py develop && COMPILE='--compile' make check
-
-# blacklist
-branches:
-  except:
-    - data-driven-pytest
+- echo "SCRIPT SECTION"
